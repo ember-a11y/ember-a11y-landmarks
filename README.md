@@ -1,5 +1,3 @@
-[![License][license-badge]][license-badge-url]
-
 # ember-a11y-landmarks
 
 This README outlines the details of collaborating on this Ember addon.
