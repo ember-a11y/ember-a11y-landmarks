@@ -11,14 +11,15 @@ ember install ember-a11y-landmarks
 ```
 
 ## Usage
-Since these are higher-order components, you would use them as blocks. Define the `tagName` unless it's a div, then define the `landmarkRole` instead. 
-Use the comments in the component as a guide. 
+Since these are higher-order components, you would use them as blocks. 
+- Define the `tagName` unless it's a div, then define the `landmarkRole` instead. 
+- Use the comments in the component as a guide. 
 
 ### Template 
 
 #### Example: Header
 To use as header element, put this in your template: 
-```
+```hbs
 {{#a11y-landmark tagName="header"}}
     ...
 {{/a11y-landmark}}
@@ -28,14 +29,14 @@ The element is then a `<header>` and the `role="banner"` is added automatically.
 #### Example: Form/Search
 If defining a form, no additional `landmarkRole` is required. However, if the form will be used as a search, then the `landmarkRole` value should be set to `search`. 
 Form:
-```
+```hbs
 {{#a11y-landmark tagName="form"}}
     ...
 {{/a11y-landmark}}
 ```
 
 Search:
-```
+```hbs
 {{#a11y-landmark tagName="form" landmarkRole="search"}}
     ...
 {{/a11y-landmark}}
