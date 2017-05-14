@@ -1,0 +1,1 @@
+export { default } from 'ember-a11y-landmarks/components/a11y-landmark';

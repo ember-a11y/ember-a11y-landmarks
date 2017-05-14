@@ -7,12 +7,19 @@
         "ember-a11y"
     ],
     "license": "MIT",
-    "author": "Melanie Sumner",
+    "author": {
+        "name": "Melanie Sumner",
+        "email": "melaniersumner@gmail.com",
+        "url": "http://melsumner.com"
+    },
     "directories": {
         "doc": "doc",
         "test": "tests"
     },
     "repository": "https://github.com/MelSumner/ember-a11y-landmarks",
+    "bugs": {
+        "url": "https://github.com/MelSumner/ember-a11y-landmarks/issues"
+    },
     "scripts": {
         "build": "ember build",
         "start": "ember server",

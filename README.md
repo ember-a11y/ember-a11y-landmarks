@@ -11,7 +11,7 @@ This README outlines the details of collaborating on this Ember addon.
 ## Running
 
 * `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+* Visit your app at [http://localhost:4200](http://localhost:4200)
 
 ## Running Tests
 
