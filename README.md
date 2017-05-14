@@ -28,6 +28,7 @@ The element is then a `<header>` and the `role="banner"` is added automatically.
 
 #### Example: Form/Search
 If defining a form, no additional `landmarkRole` is required. However, if the form will be used as a search, then the `landmarkRole` value should be set to `search`. 
+
 Form:
 ```hbs
 {{#a11y-landmark tagName="form"}}
