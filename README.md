@@ -1,4 +1,5 @@
 # ember-a11y-landmarks
+[![TravisCI Build Status](https://img.shields.io/travis/MelSumner/ember-a11y-landmarks/master.svg?label=TravisCI)](https://travis-ci.org/MelSumner/ember-a11y-landmarks)
 
 This README outlines the details of collaborating on this Ember addon.
 
