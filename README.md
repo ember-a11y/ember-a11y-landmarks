@@ -11,7 +11,7 @@ ember install ember-a11y-landmarks
 ```
 
 ## Usage
-Since these are higher-order components, you would use them as blocks. 
+- Use these like blocks.
 - Define the `tagName` unless it's a div, then define the `landmarkRole` instead. 
 - Use the comments in the component as a guide. 
 
