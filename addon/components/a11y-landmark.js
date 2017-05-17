@@ -12,6 +12,28 @@ const LANDMARK_NAVIGATION_ROLE = {
     div: 'div'
 };
 
+const VALID_LANDMARK_ROLES = [
+    'banner',
+    'navigation',
+    'aside',
+    'main',
+    'form',
+    'search',
+    'application',
+    'document',
+    'region'
+];
+
+const VALID_TAG_NAMES = [
+    'aside',
+    'footer',
+    'form',
+    'header',
+    'main',
+    'nav',
+    'div'
+];
+
 export default Ember.Component.extend({
     layout,
 
@@ -40,6 +62,11 @@ export default Ember.Component.extend({
      */
     landmarkRole: 'region',
 
+    init() {
+        this._super(...arguments);
+        this._validateProperties();
+    },
+
     /*we should set an aria-role when either a native element is not used, or the native element does not have the body element as its parent. 
      * since nothing is going to be the direct child of the body in an Ember app, we don't have to check for that. 
      */
@@ -60,5 +87,22 @@ export default Ember.Component.extend({
         }
     }),
 
+    _validateProperties() {
+        this._validateTagName(this.tagName);
+        this._validateLandmarkRole(this.landmarkRole);
+    },
 
+    _validateTagName(tagName) {
+        if (VALID_TAG_NAMES.indexOf(tagName) === -1) {
+            const validValues = VALID_TAG_NAMES.join(', ');
+            Ember.assert(`Invalid tagName "${tagName}". Must be one of ${validValues}.`);
+        }
+    },
+
+    _validateLandmarkRole(landmarkRole) {
+        if (VALID_LANDMARK_ROLES.indexOf(landmarkRole) === -1) {
+            const validValues = VALID_LANDMARK_ROLES.join(', ');
+            Ember.assert(`Invalid tagName "${landmarkRole}". Must be one of ${validValues}.`);
+        }
+    }
 });
