@@ -2,7 +2,6 @@ import Ember from 'ember';
 import layout from '../templates/components/a11y-landmark';
 
 const LANDMARK_NAVIGATION_ROLE = {
-    _default: 'region',
     header: 'banner',
     nav: 'navigation',
     aside: 'complementary',
@@ -17,7 +16,6 @@ const VALID_LANDMARK_ROLES = [
     'navigation',
     'aside',
     'main',
-    'form',
     'search',
     'application',
     'document',
@@ -46,7 +44,7 @@ export default Ember.Component.extend({
      * nav (navigation)
      * div (application, document, region or any of the previous)
      */
-    tagName: 'div',
+    tagName: null,
 
     /*should only be set if ('div' or 'form') is being used as a tagName, otherwise we don't need it.
      * valid values: 
@@ -60,37 +58,31 @@ export default Ember.Component.extend({
      * document
      * region (default)
      */
-    landmarkRole: 'region',
-
-    init() {
-        this._super(...arguments);
-        this._validateProperties();
-    },
+    landmarkRole: null,
 
     /*we should set an aria-role when either a native element is not used, or the native element does not have the body element as its parent. 
      * since nothing is going to be the direct child of the body in an Ember app, we don't have to check for that. 
      */
     ariaRole: Ember.computed('tagName', 'landmarkRole', function() {
         const landmark = this.get('tagName');
-        let landmarkRole = this.get('landmarkRole');
-        if (landmark === 'form' && landmarkRole === 'search') {
-            return 'search';
-        } else if (landmark === 'div') {
-            if (landmarkRole === 'form') {
-                Ember.assert('Use a form element for forms.');
-                //or search? think about this more in the context of Ember. 
-            } else {
-                return (landmarkRole);
+        const landmarkRole = this.get('landmarkRole');
+
+        if (landmark && landmarkRole) {
+            if (landmark === 'form' && landmarkRole === 'search') {
+                return 'search';
             }
+
+            Ember.assert('Cannot set both "tagName" and "landMarkRole. Use one or the other.');
+        } else if (landmarkRole) {
+            this._validateLandmarkRole(landmarkRole);
+            return landmarkRole;
+        } else if (landmark) {
+            this._validateTagName(landmark);
+            return LANDMARK_NAVIGATION_ROLE[landmark];
         } else {
-            return LANDMARK_NAVIGATION_ROLE[landmark] || LANDMARK_NAVIGATION_ROLE._default;
+            Ember.assert('Must specify either tagName or landmarkRole'); 
         }
     }),
-
-    _validateProperties() {
-        this._validateTagName(this.tagName);
-        this._validateLandmarkRole(this.landmarkRole);
-    },
 
     _validateTagName(tagName) {
         if (VALID_TAG_NAMES.indexOf(tagName) === -1) {
@@ -100,6 +92,10 @@ export default Ember.Component.extend({
     },
 
     _validateLandmarkRole(landmarkRole) {
+        if (landmarkRole === 'form') {
+            Ember.assert('Use a form element for forms.');
+        }
+
         if (VALID_LANDMARK_ROLES.indexOf(landmarkRole) === -1) {
             const validValues = VALID_LANDMARK_ROLES.join(', ');
             Ember.assert(`Invalid tagName "${landmarkRole}". Must be one of ${validValues}.`);
