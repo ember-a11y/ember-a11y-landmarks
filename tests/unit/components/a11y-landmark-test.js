@@ -67,7 +67,7 @@ test('it fails to determine ariaRole when tagName is invalid', function(assert) 
 });
 
 test('it fails to determine ariaRole when landmarkRole is invalid', function(assert) {
-  const expectedErrorMessage = 'Invalid tagName \"someInvalidLandmarkRole\". Must be one of banner, navigation, aside, main, search, application, document, region.';
+  const expectedErrorMessage = 'Invalid tagName \"someInvalidLandmarkRole\". Must be one of banner, navigation, complementary, main, search, application, document, region.';
 
   assert.throws(() => {
     const component = this.subject({landmarkRole: 'someInvalidLandmarkRole'});

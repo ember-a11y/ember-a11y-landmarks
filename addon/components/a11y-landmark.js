@@ -14,7 +14,7 @@ const LANDMARK_NAVIGATION_ROLE = {
 const VALID_LANDMARK_ROLES = [
     'banner',
     'navigation',
-    'aside',
+    'complementary',
     'main',
     'search',
     'application',
