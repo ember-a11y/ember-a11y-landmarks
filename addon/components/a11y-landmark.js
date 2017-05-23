@@ -16,6 +16,7 @@ const VALID_LANDMARK_ROLES = [
     'navigation',
     'complementary',
     'main',
+    'contentinfo',
     'search',
     'application',
     'document',
