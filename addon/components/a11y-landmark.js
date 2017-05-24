@@ -71,9 +71,11 @@ export default Ember.Component.extend({
         if (landmark && landmarkRole) {
             if (landmark === 'form' && landmarkRole === 'search') {
                 return 'search';
+            } else if (landmark != 'form' && landmarkRole === 'search') {
+                Ember.assert('This is not a valid combination. Use the form element for a search.');
+            } else {
+                Ember.assert('Cannot set both "tagName" and "landMarkRole." Use one or the other.');
             }
-
-            Ember.assert('Cannot set both "tagName" and "landMarkRole. Use one or the other.');
         } else if (landmarkRole) {
             this._validateLandmarkRole(landmarkRole);
             return landmarkRole;
@@ -81,7 +83,7 @@ export default Ember.Component.extend({
             this._validateTagName(landmark);
             return LANDMARK_NAVIGATION_ROLE[landmark];
         } else {
-            Ember.assert('Must specify either tagName or landmarkRole'); 
+            Ember.assert('Must specify either tagName or landmarkRole');
         }
     }),
 
