@@ -12,15 +12,15 @@ const LANDMARK_NAVIGATION_ROLE = {
 };
 
 const VALID_LANDMARK_ROLES = [
-    'banner',
-    'navigation',
-    'complementary',
-    'main',
-    'contentinfo',
-    'search',
     'application',
+    'banner',
+    'complementary',
+    'contentinfo',
     'document',
-    'region'
+    'main',
+    'navigation',
+    'region',
+    'search'
 ];
 
 const VALID_TAG_NAMES = [
@@ -96,7 +96,7 @@ export default Ember.Component.extend({
 
     _validateLandmarkRole(landmarkRole) {
         if (landmarkRole === 'form') {
-            Ember.assert('Use a form element for forms.');
+            Ember.assert('Set the tagName to form, not the landmarkRole.');
         }
 
         if (VALID_LANDMARK_ROLES.indexOf(landmarkRole) === -1) {
