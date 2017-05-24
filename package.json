@@ -1,58 +1,58 @@
 {
-  "name": "ember-a11y-landmarks",
-  "version": "0.0.4",
-  "description": "An ember addon to for easier creation of correct landmark regions for better accessibility.",
-  "keywords": [
-    "ember-addon",
-    "ember-a11y"
-  ],
-  "license": "MIT",
-  "author": {
-    "name": "Melanie Sumner",
-    "email": "melaniersumner@gmail.com",
-    "url": "http://melsumner.com"
-  },
-  "directories": {
-    "doc": "doc",
-    "test": "tests"
-  },
-  "repository": "https://github.com/MelSumner/ember-a11y-landmarks",
-  "bugs": {
-    "url": "https://github.com/MelSumner/ember-a11y-landmarks/issues"
-  },
-  "scripts": {
-    "build": "ember build",
-    "start": "ember server",
-    "test": "ember try:each"
-  },
-  "dependencies": {
-    "ember-cli-babel": "^6.0.0",
-    "ember-cli-htmlbars": "^1.1.1",
-    "ember-cli-htmlbars-inline-precompile": "^0.4.0"
-  },
-  "devDependencies": {
-    "broccoli-asset-rev": "^2.4.5",
-    "ember-ajax": "^3.0.0",
-    "ember-cli": "2.13.1",
-    "ember-cli-dependency-checker": "^1.3.0",
-    "ember-cli-eslint": "^3.0.0",
-    "ember-cli-inject-live-reload": "^1.4.1",
-    "ember-cli-qunit": "^4.0.0",
-    "ember-cli-release": "^1.0.0-beta.2",
-    "ember-cli-shims": "^1.1.0",
-    "ember-cli-sri": "^2.1.0",
-    "ember-cli-uglify": "^1.2.0",
-    "ember-disable-prototype-extensions": "^1.1.0",
-    "ember-export-application-global": "^2.0.0",
-    "ember-load-initializers": "^1.0.0",
-    "ember-resolver": "^4.0.0",
-    "ember-source": "~2.13.0",
-    "loader.js": "^4.2.3"
-  },
-  "engines": {
-    "node": ">= 4"
-  },
-  "ember-addon": {
-    "configPath": "tests/dummy/config"
-  }
+    "name": "ember-a11y-landmarks",
+    "version": "0.0.4",
+    "description": "An ember addon for easier creation of correct landmark regions for better accessibility.",
+    "keywords": [
+        "ember-addon",
+        "ember-a11y"
+    ],
+    "license": "MIT",
+    "author": {
+        "name": "Melanie Sumner",
+        "email": "melaniersumner@gmail.com",
+        "url": "http://melsumner.com"
+    },
+    "directories": {
+        "doc": "doc",
+        "test": "tests"
+    },
+    "repository": "https://github.com/MelSumner/ember-a11y-landmarks",
+    "bugs": {
+        "url": "https://github.com/MelSumner/ember-a11y-landmarks/issues"
+    },
+    "scripts": {
+        "build": "ember build",
+        "start": "ember server",
+        "test": "ember try:each"
+    },
+    "dependencies": {
+        "ember-cli-babel": "^6.0.0",
+        "ember-cli-htmlbars": "^1.1.1",
+        "ember-cli-htmlbars-inline-precompile": "^0.4.0"
+    },
+    "devDependencies": {
+        "broccoli-asset-rev": "^2.4.5",
+        "ember-ajax": "^3.0.0",
+        "ember-cli": "2.13.1",
+        "ember-cli-dependency-checker": "^1.3.0",
+        "ember-cli-eslint": "^3.0.0",
+        "ember-cli-inject-live-reload": "^1.4.1",
+        "ember-cli-qunit": "^4.0.0",
+        "ember-cli-release": "^1.0.0-beta.2",
+        "ember-cli-shims": "^1.1.0",
+        "ember-cli-sri": "^2.1.0",
+        "ember-cli-uglify": "^1.2.0",
+        "ember-disable-prototype-extensions": "^1.1.0",
+        "ember-export-application-global": "^2.0.0",
+        "ember-load-initializers": "^1.0.0",
+        "ember-resolver": "^4.0.0",
+        "ember-source": "~2.13.0",
+        "loader.js": "^4.2.3"
+    },
+    "engines": {
+        "node": ">= 4"
+    },
+    "ember-addon": {
+        "configPath": "tests/dummy/config"
+    }
 }
