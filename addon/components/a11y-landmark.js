@@ -8,7 +8,7 @@ const LANDMARK_NAVIGATION_ROLE = {
     main: 'main',
     footer: 'contentinfo',
     form: 'form',
-    div: 'div'
+    div: 'region'
 };
 
 const VALID_LANDMARK_ROLES = [
@@ -49,7 +49,7 @@ export default Ember.Component.extend({
     tagName: null,
 
     /*should only be set if ('div' or 'form') is being used as a tagName, otherwise we don't need it.
-     * valid values: 
+     * valid values:
      * banner
      * navigation
      * aside
@@ -62,8 +62,8 @@ export default Ember.Component.extend({
      */
     landmarkRole: null,
 
-    /*we should set an aria-role when either a native element is not used, or the native element does not have the body element as its parent. 
-     * since nothing is going to be the direct child of the body in an Ember app, we don't have to check for that. 
+    /*we should set an aria-role when either a native element is not used, or the native element does not have the body element as its parent.
+     * since nothing is going to be the direct child of the body in an Ember app, we don't have to check for that.
      */
     ariaRole: Ember.computed('tagName', 'landmarkRole', function() {
         const landmark = this.get('tagName');
