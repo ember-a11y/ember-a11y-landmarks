@@ -1,65 +1,33 @@
 import Ember from 'ember';
 import layout from '../templates/components/a11y-landmark';
+import LANDMARK_NAVIGATION_ROLES, { VALID_TAG_NAMES, VALID_LANDMARK_ROLES } from 'ember-a11y-landmarks/utils/landmark-navigation-roles';
 
-const LANDMARK_NAVIGATION_ROLE = {
-    header: 'banner',
-    nav: 'navigation',
-    aside: 'complementary',
-    main: 'main',
-    footer: 'contentinfo',
-    form: 'form',
-    div: 'region'
-};
+/*
+    Component accepts 'tagName' or 'landmarkRole'.
 
-const VALID_LANDMARK_ROLES = [
-    'application',
-    'banner',
-    'complementary',
-    'contentinfo',
-    'document',
-    'main',
-    'navigation',
-    'region',
-    'search'
-];
+    The tagName is your 'landmark' and can be one of 7 values:
+    aside, footer, form, header, main, nav, div (default)
 
-const VALID_TAG_NAMES = [
-    'aside',
-    'footer',
-    'form',
-    'header',
-    'main',
-    'nav',
-    'div'
-];
+    landmark is validated when computing 'ariaRole' (since tagNames can't be computed properties).
 
+    If the landmark is not a 'div' or a 'form', you will not need to set its landmarkRole -- it will
+    just use its assigned role. 'div' and 'form' have more than one role option so they should be set.
+
+    The role values are:
+        * aside (complementary)
+        * footer (contentinfo)
+        * header (banner)
+        * main (main)
+        * nav (navigation)
+        * form (form, search)
+        * div (application, document, region or any of the previous)
+*/
 export default Ember.Component.extend({
     layout,
     attributeBindings: ['ariaLabel:aria-label'],
 
-    /* this should be one of 7 values:
-     * aside (complementary)
-     * footer (contentinfo)
-     * form (form, search)
-     * header (banner)
-     * main (main)
-     * nav (navigation)
-     * div (application, document, region or any of the previous)
-     */
     tagName: null,
 
-    /*should only be set if ('div' or 'form') is being used as a tagName, otherwise we don't need it.
-     * valid values:
-     * banner
-     * navigation
-     * aside
-     * main
-     * form
-     * search
-     * application
-     * document
-     * region (default)
-     */
     landmarkRole: null,
 
     /*we should set an aria-role when either a native element is not used, or the native element does not have the body element as its parent.
@@ -82,17 +50,14 @@ export default Ember.Component.extend({
             return landmarkRole;
         } else if (landmark) {
             this._validateTagName(landmark);
-            return LANDMARK_NAVIGATION_ROLE[landmark];
+            return LANDMARK_NAVIGATION_ROLES[landmark];
         } else {
             Ember.assert('Must specify either tagName or landmarkRole');
         }
     }),
 
     _validateTagName(tagName) {
-        if (VALID_TAG_NAMES.indexOf(tagName) === -1) {
-            const validValues = VALID_TAG_NAMES.join(', ');
-            Ember.assert(`Invalid tagName "${tagName}". Must be one of ${validValues}.`);
-        }
+        this._validateValueOf('tagName', tagName, VALID_TAG_NAMES);
     },
 
     _validateLandmarkRole(landmarkRole) {
@@ -100,9 +65,13 @@ export default Ember.Component.extend({
             Ember.assert('Set the tagName to form, not the landmarkRole.');
         }
 
-        if (VALID_LANDMARK_ROLES.indexOf(landmarkRole) === -1) {
-            const validValues = VALID_LANDMARK_ROLES.join(', ');
-            Ember.assert(`Invalid tagName "${landmarkRole}". Must be one of ${validValues}.`);
+        this._validateValueOf('landmarkRole', landmarkRole, VALID_LANDMARK_ROLES);
+    },
+
+    _validateValueOf(type, value, list) {
+        if (list.indexOf(value) === -1) {
+            const validValues = list.join(', ');
+            Ember.assert(`Invalid ${type} "${value}". Must be one of ${validValues}.`);
         }
     },
 

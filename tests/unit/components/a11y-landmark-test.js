@@ -1,8 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 
 moduleForComponent('a11y-landmark', 'Unit | Component | a11y landmark', {
-    // Specify the other units that are required for this test
-    // needs: ['component:foo', 'helper:bar'],
     unit: true
 });
 
@@ -55,7 +53,7 @@ test('it fails to determine ariaRole when tagName is invalid', function(assert) 
 });
 
 test('it fails to determine ariaRole when landmarkRole is invalid', function(assert) {
-    const expectedErrorMessage = 'Invalid tagName \"someInvalidLandmarkRole\". Must be one of application, banner, complementary, contentinfo, document, main, navigation, region, search.';
+    const expectedErrorMessage = 'Invalid landmarkRole \"someInvalidLandmarkRole\". Must be one of application, banner, complementary, contentinfo, document, main, navigation, region, search.';
 
     assert.expectAssertion(() => {
         const component = this.subject({ landmarkRole: 'someInvalidLandmarkRole' });
