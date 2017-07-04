@@ -35,6 +35,7 @@ const VALID_TAG_NAMES = [
 
 export default Ember.Component.extend({
     layout,
+    attributeBindings: ['ariaLabel:aria-label'],
 
     /* this should be one of 7 values:
      * aside (complementary)
@@ -103,5 +104,8 @@ export default Ember.Component.extend({
             const validValues = VALID_LANDMARK_ROLES.join(', ');
             Ember.assert(`Invalid tagName "${landmarkRole}". Must be one of ${validValues}.`);
         }
-    }
+    },
+
+    // add support for an aria-label, since a landmark element can have one defined.
+    ariaLabel: null
 });
