@@ -8,16 +8,14 @@ moduleForComponent('a11y-landmark', 'Integration | Component | a11y landmark', {
   integration: true
 });
 
-test('throws error by default when no tagName or landmarkRole specified', function(assert) {
-  const expectedErrorMessage = 'Assertion Failed: Must specify either tagName or landmarkRole';
+test('defaults when no tagName or landmarkRole specified', function(assert) {
+  this.render(hbs`
+    {{#a11y-landmark}}
+      default landmark
+    {{/a11y-landmark}}
+  `);
 
-  assert.expectAssertion(() => {
-    this.render(hbs`
-      {{#a11y-landmark}}
-        default landmark
-      {{/a11y-landmark}}
-    `);
-  }, expectedErrorMessage);
+  assert.equal(this.$('div').attr('role'), 'region', 'landmark role is search');
 });
 
 test('search form', function(assert) {

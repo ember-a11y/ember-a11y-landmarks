@@ -52,7 +52,7 @@ export default Ember.Component.extend({
             this._validateTagName(landmark);
             return LANDMARK_NAVIGATION_ROLES[landmark];
         } else {
-            Ember.assert('Must specify either tagName or landmarkRole');
+            return 'region';
         }
     }),
 

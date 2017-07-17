@@ -4,6 +4,13 @@ moduleForComponent('a11y-landmark', 'Unit | Component | a11y landmark', {
     unit: true
 });
 
+test('it determines ariaRole with no tagName or landmarkRole', function(assert) {
+    const component = this.subject();
+    const ariaRole = component.get('ariaRole');
+
+    assert.equal(ariaRole, 'region');
+});
+
 test('it determines ariaRole with valid tagName', function(assert) {
     const component = this.subject({
         tagName: 'form'
@@ -69,15 +76,6 @@ test('it fails to determine ariaRole when tagName and landmarkRole are both prov
             landmarkRole: 'header',
             tagName: 'banner'
         });
-        component.get('ariaRole');
-    }, expectedErrorMessage);
-});
-
-test('it fails to determine ariaRole when neither tagName nor landmarkRole are provided', function(assert) {
-    const expectedErrorMessage = 'Must specify either tagName or landmarkRole';
-
-    assert.expectAssertion(() => {
-        const component = this.subject();
         component.get('ariaRole');
     }, expectedErrorMessage);
 });
