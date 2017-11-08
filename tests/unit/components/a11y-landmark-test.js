@@ -87,7 +87,7 @@ test('it fails to determine ariaRole when tagName and landmarkRole are both prov
     }, buildEmberAssertion(expectedErrorMessage));
 });
 
-test('it defaults to div[role="region"] when neither tagName nor landmarkRole are provided', function(assert) {
+test('it defaults to tagName "div" and role "region" when neither tagName nor landmarkRole are provided', function(assert) {
     const component = this.subject({});
 
     const ariaRole = component.get('ariaRole');
@@ -97,7 +97,7 @@ test('it defaults to div[role="region"] when neither tagName nor landmarkRole ar
     assert.equal(tagName, 'div');
 });
 
-test('it sets tagName correctly when tagName is "form" and landmarkRole is "search"', function(assert) {
+test('it sets tagName to "form" when tagName is "form" and landmarkRole is "search"', function(assert) {
     const component = this.subject({
         tagName: 'form',
         landmarkRole: 'search'
@@ -105,4 +105,22 @@ test('it sets tagName correctly when tagName is "form" and landmarkRole is "sear
     const tagName = component.get('tagName');
 
     assert.equal(tagName, 'form');
+});
+
+test('it sets tagName to "form" when tagName is "form" and no landmarkRole is provided', function(assert) {
+    const component = this.subject({
+        tagName: 'form'
+    });
+    const tagName = component.get('tagName');
+
+    assert.equal(tagName, 'form');
+});
+
+test('it sets tagName to "div" when landmarkRole is provided', function(assert) {
+  const component = this.subject({
+      landmarkRole: 'navigation'
+  });
+  const tagName = component.get('tagName');
+
+  assert.equal(tagName, 'div');
 });
