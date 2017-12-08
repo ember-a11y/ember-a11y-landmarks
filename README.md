@@ -2,7 +2,20 @@
 [![Latest NPM release](https://img.shields.io/npm/v/ember-a11y-landmarks.svg)](https://www.npmjs.com/package/ember-a11y-landmarks)
 [![TravisCI Build Status](https://img.shields.io/travis/MelSumner/ember-a11y-landmarks/master.svg?label=TravisCI)](https://travis-ci.org/MelSumner/ember-a11y-landmarks)
 
-Assistive technology (AT) (like screen readers) needs the right HTML semantic elements and/or roles in order to parse the page correctly. This addon helps make it easier for Ember developers by adding the correct role to the HTML element. 
+## Context
+Assistive technology(AT) requires the correct HTML semantic elements and/or roles to be used, in order to parse the page correctly. If the "landmark" elements are the direct descendant of the `body` element, then the role declaration is not needed. However, since Ember wraps each app in a div, and that div is the direct descendant of the `body` element, role declaration on these elements are required. 
+
+## How this addon works
+Certain roles need to be added to specific HTML elements, but only when those elements are not the direct descendant of the `body` element. This addon automatically adds the correct roles to the following elements: 
+
+- header | role="banner"
+- nav | role="navigation"
+- aside | role="complementary"
+- main | role="main"
+- form | role="form"
+- footer | role="contentinfo"
+
+Additionally, you could add any of the roles to a `div` element instead (see Usage).
 
 ## Installation
 
