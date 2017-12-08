@@ -1,6 +1,6 @@
 # ember-a11y-landmarks
 [![Latest NPM release](https://img.shields.io/npm/v/ember-a11y-landmarks.svg)](https://www.npmjs.com/package/ember-a11y-landmarks)
-[![TravisCI Build Status](https://img.shields.io/travis/MelSumner/ember-a11y-landmarks/master.svg?label=TravisCI)](https://travis-ci.org/MelSumner/ember-a11y-landmarks)
+[![TravisCI Build Status](https://img.shields.io/travis/ember-a11y/ember-a11y-landmarks/master.svg?label=TravisCI)](https://travis-ci.org/ember-a11y/ember-a11y-landmarks)
 
 ## Context
 Assistive technology(AT) requires the correct HTML semantic elements and/or roles to be used, in order to parse the page correctly. If the "landmark" elements are the direct descendant of the `body` element, then the role declaration is not needed. However, since Ember wraps each app in a div, and that div is the direct descendant of the `body` element, role declaration on these elements are required. 
