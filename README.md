@@ -2,20 +2,23 @@
 [![Latest NPM release](https://img.shields.io/npm/v/ember-a11y-landmarks.svg)](https://www.npmjs.com/package/ember-a11y-landmarks)
 [![TravisCI Build Status](https://img.shields.io/travis/ember-a11y/ember-a11y-landmarks/master.svg?label=TravisCI)](https://travis-ci.org/ember-a11y/ember-a11y-landmarks)
 
-## Context
-Assistive technology(AT) requires the correct HTML semantic elements and/or roles to be used, in order to parse the page correctly. If the "landmark" elements are the direct descendant of the `body` element, then the role declaration is not needed. However, since Ember wraps each app in a div, and that div is the direct descendant of the `body` element, role declaration on these elements are required. 
+The `ember-a11y-landmarks` addon helps you assign the `role` attribute that should go on landmark tags like `<header>` and `<nav>`, without needing to learn the intricacies of when to add roles or what they should be. A landmark is a special kind of semantic HTML tag that Assistive technology(AT) uses to parse a page correctly.
+
+When is this addon needed? In a typical Ember app, almost everything gets wrapped in a `<div>`, but this can be confusing to tools like screen readers. The Assistive Technology expects that either landmark elements are direct descendants of the `<body>` element or that they have a particular `role` attribute. `ember-a11y-landmarks` handles this problem for you.
 
 ## How this addon works
-Certain roles need to be added to specific HTML elements, but only when those elements are not the direct descendant of the `body` element. This addon automatically adds the correct roles to the following elements: 
+This addon helps add the correct roles to the following elements:
 
-- header | role="banner"
-- nav | role="navigation"
-- aside | role="complementary"
-- main | role="main"
-- form | role="form"
-- footer | role="contentinfo"
+| tagName | role |
+| ---- | --- |
+| header | banner |
+| nav | navigation |
+| aside | complementary |
+| main | main |
+| form | form |
+| footer | contentinfo |
 
-Additionally, you could add any of the roles to a `div` element instead (see Usage).
+While semantic landmark tags are best for accessibility, some developers may be faced with working on an app that uses `div` tags instead. For those cases, this addon provides a way to add roles to a `div` element until they can be refactored (see [Div Usage](#div-usage)).
 
 ## Installation
 
@@ -23,24 +26,45 @@ Additionally, you could add any of the roles to a `div` element instead (see Usa
 ember install ember-a11y-landmarks
 ```
 
-## Usage
-- Use these like blocks.
-- Define the `tagName` unless it's a div, then define the `landmarkRole` instead. 
-- Use the comments in the component as a guide. 
+## Landmark Tag Usage
 
-### Template 
+This addon is used like a block component. Just set the `tagName` attribute to `header`, `nav`, `aside`, `main`, `form`, or `footer`, and put your content inside the block. For example, here's a header:
 
-#### Example: Header
-To use as header element, put this in your template: 
-```hbs
+```
 {{#a11y-landmark tagName="header"}}
-    ...
+    This is my header content
 {{/a11y-landmark}}
 ```
-The element is then a `<header>` and the `role="banner"` is added automatically. 
 
-#### Example: Form/Search
-If defining a form, no additional `landmarkRole` is required. However, if the form will be used as a search, then the `landmarkRole` value should be set to `search`. 
+The resulting markup in the DOM will have the correct tag type and the role that should be used for that tag:
+
+```
+<header id="ember337" role="banner" class="ember-view">
+    This is my header content
+</header>
+```
+
+## Div Usage
+
+If a developer must use a div instead of a semantic tag like `<header>`, define `landmarkRole` instead of `tagname`. You can look up the correct landmark role in the  [How this addon works](#how-this-addon-works) table. Here's a header example:
+
+```
+{{#a11y-landmark landmarkRole="banner"}}
+    This is my header content (that should be refactored later to go inside a real header tag)
+{{/a11y-landmark}}
+```
+
+In the DOM markup, this will result in a `div` with the specified `role`:
+
+ ```
+<div id="ember337" role="banner" class="ember-view">
+      This is my header content (that should be refactored later to go inside a real header tag)
+</div>
+ ```
+
+## Form/Search Usage
+
+If defining a form, no additional `landmarkRole` is required. However, if the form will be used as a search, then the `landmarkRole` value should be set to `search`.
 
 Form:
 ```hbs
