@@ -76,7 +76,7 @@ test('it fails to determine ariaRole when landmarkRole is invalid', function(ass
 });
 
 test('it fails to determine ariaRole when tagName and landmarkRole are both provided', function(assert) {
-    const expectedErrorMessage = 'Cannot set both \"tagName\" and \"landMarkRole.\" Use one or the other.';
+    const expectedErrorMessage = 'Only "div" or "form" can be used with "landMarkRole." Use one or the other.';
 
     assert.throws(() => {
         const component = this.subject({
@@ -87,11 +87,40 @@ test('it fails to determine ariaRole when tagName and landmarkRole are both prov
     }, buildEmberAssertion(expectedErrorMessage));
 });
 
-test('it fails to determine ariaRole when neither tagName nor landmarkRole are provided', function(assert) {
-    const expectedErrorMessage = 'Must specify either tagName or landmarkRole';
+test('it defaults to tagName "div" and role "region" when neither tagName nor landmarkRole are provided', function(assert) {
+    const component = this.subject({});
 
-    assert.throws(() => {
-        const component = this.subject();
-        component.get('ariaRole');
-    }, buildEmberAssertion(expectedErrorMessage));
+    const ariaRole = component.get('ariaRole');
+    assert.equal(ariaRole, 'region');
+
+    const tagName = component.get('tagName');
+    assert.equal(tagName, 'div');
+});
+
+test('it sets tagName to "form" when tagName is "form" and landmarkRole is "search"', function(assert) {
+    const component = this.subject({
+        tagName: 'form',
+        landmarkRole: 'search'
+    });
+    const tagName = component.get('tagName');
+
+    assert.equal(tagName, 'form');
+});
+
+test('it sets tagName to "form" when tagName is "form" and no landmarkRole is provided', function(assert) {
+    const component = this.subject({
+        tagName: 'form'
+    });
+    const tagName = component.get('tagName');
+
+    assert.equal(tagName, 'form');
+});
+
+test('it sets tagName to "div" when landmarkRole is provided', function(assert) {
+  const component = this.subject({
+      landmarkRole: 'navigation'
+  });
+  const tagName = component.get('tagName');
+
+  assert.equal(tagName, 'div');
 });

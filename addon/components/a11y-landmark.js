@@ -8,7 +8,7 @@ const LANDMARK_NAVIGATION_ROLE = {
     main: 'main',
     footer: 'contentinfo',
     form: 'form',
-    div: 'div'
+    div: 'region'
 };
 
 const VALID_LANDMARK_ROLES = [
@@ -46,10 +46,10 @@ export default Ember.Component.extend({
      * nav (navigation)
      * div (application, document, region or any of the previous)
      */
-    tagName: null,
+    tagName: 'div',
 
     /*should only be set if ('div' or 'form') is being used as a tagName, otherwise we don't need it.
-     * valid values: 
+     * valid values:
      * banner
      * navigation
      * aside
@@ -62,8 +62,8 @@ export default Ember.Component.extend({
      */
     landmarkRole: null,
 
-    /*we should set an aria-role when either a native element is not used, or the native element does not have the body element as its parent. 
-     * since nothing is going to be the direct child of the body in an Ember app, we don't have to check for that. 
+    /*we should set an aria-role when either a native element is not used, or the native element does not have the body element as its parent.
+     * since nothing is going to be the direct child of the body in an Ember app, we don't have to check for that.
      */
     ariaRole: Ember.computed('tagName', 'landmarkRole', function() {
         const landmark = this.get('tagName');
@@ -74,8 +74,11 @@ export default Ember.Component.extend({
                 return 'search';
             } else if (landmark != 'form' && landmarkRole === 'search') {
                 Ember.assert('This is not a valid combination. Use the form element for a search.');
+            } else if (landmark === 'div') {
+                this._validateLandmarkRole(landmarkRole);
+                return landmarkRole;
             } else {
-                Ember.assert('Cannot set both "tagName" and "landMarkRole." Use one or the other.');
+                Ember.assert('Only "div" or "form" can be used with "landMarkRole." Use one or the other.');
             }
         } else if (landmarkRole) {
             this._validateLandmarkRole(landmarkRole);
@@ -84,7 +87,10 @@ export default Ember.Component.extend({
             this._validateTagName(landmark);
             return LANDMARK_NAVIGATION_ROLE[landmark];
         } else {
-            Ember.assert('Must specify either tagName or landmarkRole');
+            Ember.warn('Should specify either tagName or landmarkRole', {
+                id: 'ember-a11y.no-tagName-or-landmarkRole'
+            });
+            return 'region';
         }
     }),
 
