@@ -1,16 +1,18 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('a11y-landmark', 'Integration | Component | a11y landmark', {
-  integration: true
-});
+module('Integration | Component | a11y landmark', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  this.render(hbs`
-    {{#a11y-landmark tagName="form"}}
-      template block text
-    {{/a11y-landmark}}
-  `);
+  test('it renders', async function(assert) {
+    await render(hbs`
+      {{#a11y-landmark tagName="form"}}
+        template block text
+      {{/a11y-landmark}}
+    `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+    assert.equal(find('*').textContent.trim(), 'template block text');
+  });
 });
