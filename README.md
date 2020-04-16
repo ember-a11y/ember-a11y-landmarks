@@ -20,7 +20,7 @@ This addon helps add the correct roles to the following elements:
 
 While semantic landmark tags are best for accessibility, some developers may be faced with working on an app that uses `div` tags instead. For those cases, this addon provides a way to add roles to a `div` element until they can be refactored (see [Div Usage](#div-usage)).
 
-## Installation
+
 
 ```bash
 ember install ember-a11y-landmarks
@@ -82,3 +82,9 @@ Search:
 
 ## Contributions
 Contributions to this project are encouraged.
+
+## Compatibility
+
+* Ember.js v3.12 or above
+* Ember CLI v2.13 or above
+* Node.js v10 or above

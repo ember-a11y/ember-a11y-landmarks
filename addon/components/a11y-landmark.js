@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import { assert, warn } from '@ember/debug';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from '../templates/components/a11y-landmark';
 
 const LANDMARK_NAVIGATION_ROLE = {
@@ -33,7 +35,7 @@ const VALID_TAG_NAMES = [
     'div'
 ];
 
-export default Ember.Component.extend({
+export default Component.extend({
     layout,
     attributeBindings: ['ariaLabel:aria-label'],
 
@@ -65,7 +67,7 @@ export default Ember.Component.extend({
     /*we should set an aria-role when either a native element is not used, or the native element does not have the body element as its parent.
      * since nothing is going to be the direct child of the body in an Ember app, we don't have to check for that.
      */
-    ariaRole: Ember.computed('tagName', 'landmarkRole', function() {
+    ariaRole: computed('tagName', 'landmarkRole', function() {
         const landmark = this.get('tagName');
         const landmarkRole = this.get('landmarkRole');
 
@@ -73,12 +75,12 @@ export default Ember.Component.extend({
             if (landmark === 'form' && landmarkRole === 'search') {
                 return 'search';
             } else if (landmark != 'form' && landmarkRole === 'search') {
-                Ember.assert('This is not a valid combination. Use the form element for a search.');
+                assert('This is not a valid combination. Use the form element for a search.');
             } else if (landmark === 'div') {
                 this._validateLandmarkRole(landmarkRole);
                 return landmarkRole;
             } else {
-                Ember.assert('Only "div" or "form" can be used with "landMarkRole." Use one or the other.');
+                assert('Only "div" or "form" can be used with "landMarkRole." Use one or the other.');
             }
         } else if (landmarkRole) {
             this._validateLandmarkRole(landmarkRole);
@@ -87,28 +89,29 @@ export default Ember.Component.extend({
             this._validateTagName(landmark);
             return LANDMARK_NAVIGATION_ROLE[landmark];
         } else {
-            Ember.warn('Should specify either tagName or landmarkRole', {
+            warn('Should specify either tagName or landmarkRole', {
                 id: 'ember-a11y.no-tagName-or-landmarkRole'
             });
             return 'region';
         }
+      return undefined;
     }),
 
     _validateTagName(tagName) {
         if (VALID_TAG_NAMES.indexOf(tagName) === -1) {
             const validValues = VALID_TAG_NAMES.join(', ');
-            Ember.assert(`Invalid tagName "${tagName}". Must be one of ${validValues}.`);
+            assert(`Invalid tagName "${tagName}". Must be one of ${validValues}.`);
         }
     },
 
     _validateLandmarkRole(landmarkRole) {
         if (landmarkRole === 'form') {
-            Ember.assert('Set the tagName to form, not the landmarkRole.');
+            assert('Set the tagName to form, not the landmarkRole.');
         }
 
         if (VALID_LANDMARK_ROLES.indexOf(landmarkRole) === -1) {
             const validValues = VALID_LANDMARK_ROLES.join(', ');
-            Ember.assert(`Invalid tagName "${landmarkRole}". Must be one of ${validValues}.`);
+            assert(`Invalid tagName "${landmarkRole}". Must be one of ${validValues}.`);
         }
     },
 
