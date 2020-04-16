@@ -8,9 +8,9 @@ module('Integration | Component | a11y landmark', function(hooks) {
 
   test('it renders', async function(assert) {
     await render(hbs`
-      {{#a11y-landmark tagName="form"}}
+      <A11y-landmark @tagName="form">
         template block text
-      {{/a11y-landmark}}
+      </A11y-landmark>
     `);
 
     assert.equal(find('*').textContent.trim(), 'template block text');
