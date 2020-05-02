@@ -1,6 +1,6 @@
 {
   "name": "ember-a11y-landmarks",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "An ember addon for easier creation of correct landmark regions for better accessibility.",
   "keywords": [
     "ember-addon",
