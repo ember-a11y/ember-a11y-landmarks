@@ -6,6 +6,9 @@
     "ember-addon",
     "ember-a11y"
   ],
+  "bugs": {
+    "url": "https://github.com/MelSumner/ember-a11y-landmarks/issues"
+  },
   "repository": "https://github.com/MelSumner/ember-a11y-landmarks",
   "license": "MIT",
   "author": {
@@ -17,16 +20,14 @@
     "doc": "doc",
     "test": "tests"
   },
-  "bugs": {
-    "url": "https://github.com/MelSumner/ember-a11y-landmarks/issues"
-  },
   "scripts": {
     "build": "ember build --environment=production",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "ember serve",
     "test": "ember test",
-    "test:all": "ember try:each"
+    "test:all": "ember try:each",
+    "release": "release-it"
   },
   "dependencies": {
     "ember-cli-babel": "^7.17.2",
@@ -59,15 +60,35 @@
     "eslint-plugin-ember": "^7.7.2",
     "eslint-plugin-node": "^11.0.0",
     "loader.js": "^4.7.0",
-    "qunit-dom": "^1.0.0"
+    "qunit-dom": "^1.0.0",
+    "release-it": "^13.5.7",
+    "release-it-lerna-changelog": "^2.3.0"
   },
   "engines": {
     "node": "10.* || >= 12"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   },
   "ember": {
     "edition": "octane"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
   }
 }
