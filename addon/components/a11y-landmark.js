@@ -68,8 +68,8 @@ export default Component.extend({
      * since nothing is going to be the direct child of the body in an Ember app, we don't have to check for that.
      */
     ariaRole: computed('tagName', 'landmarkRole', function() {
-        const landmark = this.get('tagName');
-        const landmarkRole = this.get('landmarkRole');
+        const landmark = this.tagName;
+        const landmarkRole = this.landmarkRole;
 
         if (landmark && landmarkRole) {
             if (landmark === 'form' && landmarkRole === 'search') {
